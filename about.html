@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - HZ Hefaz</title>
+
+    <!-- box icons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+        :root {
+            --bg-color: #0B1221;
+            --second-bg-color: #162033;
+            --text-color: #E2E8F0;
+            --main-color: #00FFB2;
+            --hover-color: #00E6A1;
+            --subtitle-color: #94A3B8;
+            --shadow-color: rgba(0, 255, 178, 0.1);
+            --neon-shadow: 0 0 10px rgba(0, 255, 178, 0.5),
+                          0 0 20px rgba(0, 255, 178, 0.3),
+                          0 0 30px rgba(0, 255, 178, 0.1);
+            --grid-size: 30px;
+            --grid-color: rgba(0, 255, 178, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            text-decoration: none;
+            border: none;
+            outline: none;
+            scroll-behavior: smooth;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        html {
+            font-size: 62.5%;
+            overflow-x: hidden;
+        }
+
+        body {
+            background: var(--bg-color);
+            color: var(--text-color);
+            cursor: none;
+        }
+
+        /* Animated Background */
+        .background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                linear-gradient(to bottom, transparent 0%, var(--bg-color) 100%),
+                linear-gradient(to right, var(--bg-color), transparent);
+            overflow: hidden;
+        }
+
+        .grid {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background-image: 
+                linear-gradient(var(--grid-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+            background-size: var(--grid-size) var(--grid-size);
+            transform: perspective(100vh) rotateX(60deg);
+            animation: grid-move 20s linear infinite;
+            opacity: 0.3;
+        }
+
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--main-color);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--main-color);
+            animation: particle-move 6s infinite;
+        }
+
+        @keyframes grid-move {
+            0% {
+                transform: perspective(100vh) rotateX(60deg) translateY(0);
+            }
+            100% {
+                transform: perspective(100vh) rotateX(60deg) translateY(var(--grid-size));
+            }
+        }
+
+        @keyframes particle-move {
+            0% {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) scale(1);
+                opacity: 0;
+            }
+        }
+
+        /* Cursor styles */
+        .cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--main-color);
+            border-radius: 50%;
+            left: 0;
+            top: 0;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            transition: .1s ease-out;
+            z-index: 999;
+        }
+
+        .cursor2 {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            background-color: var(--main-color);
+            border-radius: 50%;
+            left: 0;
+            top: 0;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            transition: .15s ease-out;
+            z-index: 999;
+        }
+
+        .cursor.hover {
+            transform: translate(-50%, -50%) scale(1.5);
+            background-color: var(--main-color);
+            opacity: 0.5;
+        }
+
+        .cursor2.hover {
+            opacity: 0;
+        }
+
+        section {
+            min-height: 100vh;
+            padding: 10rem 9% 2rem;
+        }
+
+        .about-hero {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5rem;
+            padding-top: 8rem;
+        }
+
+        .hero-image {
+            flex: 1;
+            max-width: 400px;
+            position: relative;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 1000px;
+        }
+
+        .tech-sphere {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            transform-style: preserve-3d;
+            animation: sphereRotate 20s linear infinite;
+        }
+
+        .tech-ring {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 2px solid rgba(0, 255, 178, 0.1);
+            border-radius: 50%;
+            animation: ringPulse 3s ease-in-out infinite;
+        }
+
+        .tech-ring:nth-child(1) {
+            transform: rotateY(60deg);
+            border-color: rgba(0, 255, 178, 0.2);
+        }
+
+        .tech-ring:nth-child(2) {
+            transform: rotateX(60deg);
+            border-color: rgba(0, 255, 178, 0.15);
+        }
+
+        .tech-ring:nth-child(3) {
+            transform: rotateZ(60deg);
+            border-color: rgba(0, 255, 178, 0.1);
+        }
+
+        .tech-icon {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: var(--main-color);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--bg-color);
+            font-size: 20px;
+            box-shadow: 0 0 20px var(--main-color);
+        }
+
+        .tech-icon:nth-child(1) {
+            transform: translate(150px, 0) rotateZ(0deg);
+        }
+
+        .tech-icon:nth-child(2) {
+            transform: translate(-75px, 130px) rotateZ(120deg);
+        }
+
+        .tech-icon:nth-child(3) {
+            transform: translate(-75px, -130px) rotateZ(240deg);
+        }
+
+        .tech-particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--main-color);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--main-color);
+            animation: particleFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes sphereRotate {
+            0% {
+                transform: rotateX(0) rotateY(0) rotateZ(0);
+            }
+            100% {
+                transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+            }
+        }
+
+        @keyframes ringPulse {
+            0%, 100% {
+                transform: scale(1) rotate(60deg);
+                opacity: 0.5;
+            }
+            50% {
+                transform: scale(1.1) rotate(60deg);
+                opacity: 0.8;
+            }
+        }
+
+        @keyframes particleFloat {
+            0%, 100% {
+                transform: translate(0, 0);
+                opacity: 0;
+            }
+            50% {
+                transform: translate(100px, -100px);
+                opacity: 1;
+            }
+        }
+
+        .hero-content {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .hero-content h1 {
+            font-size: 4.5rem;
+            margin-bottom: 2rem;
+            color: var(--main-color);
+            text-shadow: var(--neon-shadow);
+        }
+
+        .hero-content h2 {
+            font-size: 2.4rem;
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-content p {
+            font-size: 1.6rem;
+            color: var(--subtitle-color);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .stats-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            margin: 6rem 0;
+            padding: 2rem;
+        }
+
+        .stat-card {
+            background: rgba(22, 32, 51, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 2rem;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid rgba(0, 255, 178, 0.1);
+            box-shadow: var(--neon-shadow);
+            transition: .3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-1rem);
+            box-shadow: var(--neon-shadow), 0 0 30px rgba(0, 255, 178, 0.2);
+        }
+
+        .stat-card h3 {
+            font-size: 3.6rem;
+            color: var(--main-color);
+            margin-bottom: 1rem;
+            text-shadow: var(--neon-shadow);
+        }
+
+        .stat-card p {
+            font-size: 1.6rem;
+            color: var(--subtitle-color);
+        }
+
+        .skills-section {
+            padding-top: 8rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3.6rem;
+            color: var(--main-color);
+            margin-bottom: 4rem;
+            text-shadow: var(--neon-shadow);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            padding: 2rem;
+        }
+
+        .skill-card {
+            background: rgba(22, 32, 51, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 2rem;
+            padding: 3rem;
+            text-align: left;
+            transition: .3s ease;
+            border: 1px solid rgba(0, 255, 178, 0.1);
+            box-shadow: var(--neon-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(0, 255, 178, 0.1), transparent);
+            transform: translateX(-100%);
+            transition: .5s;
+        }
+
+        .skill-card:hover::before {
+            transform: translateX(100%);
+        }
+
+        .skill-card:hover {
+            transform: translateY(-1rem);
+            box-shadow: var(--neon-shadow), 0 0 30px rgba(0, 255, 178, 0.2);
+        }
+
+        .skill-card i {
+            font-size: 4rem;
+            color: var(--main-color);
+            margin-bottom: 2rem;
+            text-shadow: var(--neon-shadow);
+        }
+
+        .skill-card h3 {
+            font-size: 2.4rem;
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-card p {
+            font-size: 1.6rem;
+            color: var(--subtitle-color);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .skill-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .skill-list li {
+            font-size: 1.5rem;
+            color: var(--text-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .skill-list li i {
+            font-size: 1.4rem;
+            margin-right: 1rem;
+            color: var(--main-color);
+        }
+
+        .back-home {
+            position: fixed;
+            bottom: 4rem;
+            right: 4rem;
+            background: var(--main-color);
+            color: var(--second-bg-color);
+            width: 5rem;
+            height: 5rem;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2.5rem;
+            box-shadow: var(--neon-shadow);
+            transition: .3s ease;
+            z-index: 100;
+        }
+
+        .back-home:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--neon-shadow), 0 0 30px rgba(0, 255, 178, 0.4);
+        }
+
+        @media (max-width: 991px) {
+            .about-hero {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-image {
+                width: 350px;
+                height: 350px;
+            }
+
+            .tech-sphere {
+                width: 250px;
+                height: 250px;
+            }
+
+            .tech-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 18px;
+            }
+
+            .tech-icon:nth-child(1) {
+                transform: translate(125px, 0) rotateZ(0deg);
+            }
+
+            .tech-icon:nth-child(2) {
+                transform: translate(-62.5px, 108px) rotateZ(120deg);
+            }
+
+            .tech-icon:nth-child(3) {
+                transform: translate(-62.5px, -108px) rotateZ(240deg);
+            }
+
+            .stats-section {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            html {
+                font-size: 55%;
+            }
+
+            .hero-image {
+                width: 300px;
+                height: 300px;
+            }
+
+            .tech-sphere {
+                width: 220px;
+                height: 220px;
+            }
+
+            .tech-icon {
+                width: 30px;
+                height: 30px;
+                font-size: 16px;
+            }
+
+            .tech-icon:nth-child(1) {
+                transform: translate(110px, 0) rotateZ(0deg);
+            }
+
+            .tech-icon:nth-child(2) {
+                transform: translate(-55px, 95px) rotateZ(120deg);
+            }
+
+            .tech-icon:nth-child(3) {
+                transform: translate(-55px, -95px) rotateZ(240deg);
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-section {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 450px) {
+            html {
+                font-size: 50%;
+            }
+
+            .hero-image {
+                width: 260px;
+                height: 260px;
+            }
+
+            .tech-sphere {
+                width: 200px;
+                height: 200px;
+            }
+
+            .tech-icon {
+                width: 28px;
+                height: 28px;
+                font-size: 14px;
+            }
+
+            .tech-icon:nth-child(1) {
+                transform: translate(100px, 0) rotateZ(0deg);
+            }
+
+            .tech-icon:nth-child(2) {
+                transform: translate(-50px, 87px) rotateZ(120deg);
+            }
+
+            .tech-icon:nth-child(3) {
+                transform: translate(-50px, -87px) rotateZ(240deg);
+            }
+
+            .hero-content h1 {
+                font-size: 3.5rem;
+            }
+        }
+
+        @media (hover: none) or (pointer: coarse) {
+            .cursor,
+            .cursor2 {
+                display: none !important;
+            }
+
+            body,
+            .header,
+            .logo,
+            .btn,
+            a {
+                cursor: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background">
+        <div class="grid"></div>
+        <div class="particles"></div>
+    </div>
+
+    <section class="about-hero">
+        <div class="hero-content">
+            <h1>HZ Hefaz</h1>
+            <h2>Digital Creative Professional</h2>
+            <p>Welcome to my world of digital creativity! I'm a multifaceted professional with expertise in web development, design, and cybersecurity. With a passion for innovation and a commitment to excellence, I transform ideas into impactful digital experiences.</p>
+            <p>My journey in the digital realm has equipped me with a unique blend of technical prowess and creative insight, allowing me to deliver solutions that not only meet technical requirements but also exceed aesthetic expectations.</p>
+        </div>
+        <div class="hero-image">
+            <div class="tech-sphere">
+                <div class="tech-ring"></div>
+                <div class="tech-ring"></div>
+                <div class="tech-ring"></div>
+                <div class="tech-icon"><i class="fa-solid fa-code"></i></div>
+                <div class="tech-icon"><i class="fa-solid fa-palette"></i></div>
+                <div class="tech-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                <div class="tech-particle"></div>
+                <div class="tech-particle"></div>
+                <div class="tech-particle"></div>
+            </div>
+        </div>
+    </section>
+
+    <div class="stats-section">
+        <div class="stat-card">
+            <h3>5+</h3>
+            <p>Years Experience</p>
+        </div>
+        <div class="stat-card">
+            <h3>100+</h3>
+            <p>Projects Completed</p>
+        </div>
+        <div class="stat-card">
+            <h3>50+</h3>
+            <p>Happy Clients</p>
+        </div>
+        <div class="stat-card">
+            <h3>6</h3>
+            <p>Professional Services</p>
+        </div>
+    </div>
+
+    <section class="skills-section">
+        <h2 class="section-title">Professional Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <i class='bx bx-code-alt'></i>
+                <h3>Web Development</h3>
+                <p>Full-stack web developer specializing in creating responsive and dynamic websites.</p>
+                <ul class="skill-list">
+                    <li><i class="fas fa-check"></i>HTML5, CSS3, JavaScript</li>
+                    <li><i class="fas fa-check"></i>React.js, Node.js</li>
+                    <li><i class="fas fa-check"></i>PHP, MySQL</li>
+                    <li><i class="fas fa-check"></i>Responsive Design</li>
+                    <li><i class="fas fa-check"></i>API Integration</li>
+                </ul>
+            </div>
+
+            <div class="skill-card">
+                <i class='bx bxs-paint'></i>
+                <h3>Graphics Design</h3>
+                <p>Creative designer with an eye for detail and modern aesthetics.</p>
+                <ul class="skill-list">
+                    <li><i class="fas fa-check"></i>Adobe Photoshop</li>
+                    <li><i class="fas fa-check"></i>Adobe Illustrator</li>
+                    <li><i class="fas fa-check"></i>Logo Design</li>
+                    <li><i class="fas fa-check"></i>Brand Identity</li>
+                    <li><i class="fas fa-check"></i>Social Media Graphics</li>
+                </ul>
+            </div>
+
+            <div class="skill-card">
+                <i class='bx bx-code-block'></i>
+                <h3>Ethical Hacking</h3>
+                <p>Cybersecurity expert focused on protecting digital assets and systems.</p>
+                <ul class="skill-list">
+                    <li><i class="fas fa-check"></i>Penetration Testing</li>
+                    <li><i class="fas fa-check"></i>Security Auditing</li>
+                    <li><i class="fas fa-check"></i>Vulnerability Assessment</li>
+                    <li><i class="fas fa-check"></i>Network Security</li>
+                    <li><i class="fas fa-check"></i>Security Best Practices</li>
+                </ul>
+            </div>
+
+            <div class="skill-card">
+                <i class="fa-solid fa-video"></i>
+                <h3>Video Editing</h3>
+                <p>Professional video editor creating engaging visual content.</p>
+                <ul class="skill-list">
+                    <li><i class="fas fa-check"></i>Adobe Premiere Pro</li>
+                    <li><i class="fas fa-check"></i>After Effects</li>
+                    <li><i class="fas fa-check"></i>Motion Graphics</li>
+                    <li><i class="fas fa-check"></i>Color Grading</li>
+                    <li><i class="fas fa-check"></i>Video Production</li>
+                </ul>
+            </div>
+
+            <div class="skill-card">
+                <i class="fa-brands fa-uikit"></i>
+                <h3>UI/UX Design</h3>
+                <p>User experience designer creating intuitive and engaging interfaces.</p>
+                <ul class="skill-list">
+                    <li><i class="fas fa-check"></i>Figma</li>
+                    <li><i class="fas fa-check"></i>Adobe XD</li>
+                    <li><i class="fas fa-check"></i>Wireframing</li>
+                    <li><i class="fas fa-check"></i>Prototyping</li>
+                    <li><i class="fas fa-check"></i>User Research</li>
+                </ul>
+            </div>
+
+            <div class="skill-card">
+                <i class="fa-regular fa-image"></i>
+                <h3>Photo Editing</h3>
+                <p>Expert photo editor transforming images with professional touch.</p>
+                <ul class="skill-list">
+                    <li><i class="fas fa-check"></i>Photo Retouching</li>
+                    <li><i class="fas fa-check"></i>Color Correction</li>
+                    <li><i class="fas fa-check"></i>Portrait Enhancement</li>
+                    <li><i class="fas fa-check"></i>Background Removal</li>
+                    <li><i class="fas fa-check"></i>Photo Manipulation</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <a href="index.html" class="back-home">
+        <i class="fas fa-home"></i>
+    </a>
+
+    <div class="cursor"></div>
+    <div class="cursor2"></div>
+
+    <script>
+        // Cursor functionality
+        var cursor = document.querySelector(".cursor");
+        var cursor2 = document.querySelector(".cursor2");
+        var links = document.querySelectorAll('a, button, .btn');
+
+        document.addEventListener("mousemove", function(e) {
+            cursor.style.cssText = cursor2.style.cssText = "left: " + e.clientX + "px; top: " + e.clientY + "px;";
+        });
+
+        links.forEach(link => {
+            link.addEventListener('mouseenter', () => {
+                cursor.classList.add('hover');
+                cursor2.classList.add('hover');
+            });
+            link.addEventListener('mouseleave', () => {
+                cursor.classList.remove('hover');
+                cursor2.classList.remove('hover');
+            });
+        });
+
+        // Particle animation
+        function createParticles() {
+            const particlesContainer = document.querySelector('.particles');
+            const particleCount = 50;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // Random position
+                particle.style.left = Math.random() * 100 + '%';
+                
+                // Random delay
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Initialize particles
+        window.addEventListener('load', createParticles);
+
+        // Initialize cursor only on desktop devices
+        if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+            const cursor = document.querySelector(".cursor");
+            const cursor2 = document.querySelector(".cursor2");
+            if (cursor) cursor.style.display = 'none';
+            if (cursor2) cursor2.style.display = 'none';
+        }
+    </script>
+</body>
+
+</html> 
