@@ -1229,36 +1229,404 @@ span {
 }
 
 .footer {
+    position: relative;
+    padding: 4rem 9% 2rem;
+    background: linear-gradient(
+        to bottom,
+        rgba(22, 32, 51, 0.95),
+        rgba(11, 18, 33, 0.98)
+    );
+    overflow: hidden;
+    z-index: 1;
+    border-top-left-radius: 3rem;
+    border-top-right-radius: 3rem;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(0, 255, 178, 0.1);
+    box-shadow: 0 -10px 30px rgba(0, 255, 178, 0.1);
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.05),
+        transparent
+    );
+    transform: translateX(-100%);
+    animation: footerGloss 8s linear infinite;
+}
+
+@keyframes footerGloss {
+    0% {
+        transform: translateX(-100%);
+    }
+    50% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+.footer-content {
+    position: relative;
+    z-index: 2;
+    background: rgba(22, 32, 51, 0.5);
+    padding: 2rem;
+    border-radius: 2rem;
+    border: 1px solid rgba(0, 255, 178, 0.1);
+    box-shadow: 
+        0 4px 15px rgba(0, 0, 0, 0.1),
+        inset 0 0 20px rgba(0, 255, 178, 0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.footer-section {
+    padding: 1.5rem;
+    background: rgba(22, 32, 51, 0.3);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(0, 255, 178, 0.1);
+    border-radius: 1.5rem;
+    transition: all 0.3s ease;
+    box-shadow: 
+        0 4px 15px rgba(0, 0, 0, 0.1),
+        inset 0 0 20px rgba(0, 255, 178, 0.05);
+}
+
+.footer-section:hover {
+    transform: translateY(-5px);
+    box-shadow: 
+        0 8px 25px rgba(0, 255, 178, 0.2),
+        inset 0 0 25px rgba(0, 255, 178, 0.1);
+    border-color: rgba(0, 255, 178, 0.3);
+    background: rgba(22, 32, 51, 0.5);
+}
+
+.footer-section h4 {
+    color: var(--main-color);
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    display: inline-block;
+    text-shadow: 0 0 10px rgba(0, 255, 178, 0.3);
+}
+
+.footer-section h4::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 50%;
+    height: 2px;
+    background: linear-gradient(
+        90deg,
+        var(--main-color),
+        transparent
+    );
+    box-shadow: 0 0 10px rgba(0, 255, 178, 0.5);
+}
+
+.footer-bottom {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding-top: 2rem;
+    margin-top: 2rem;
+    border-top: 1px solid rgba(0, 255, 178, 0.1);
+    background: linear-gradient(
+        to bottom,
+        rgba(22, 32, 51, 0.3),
+        rgba(22, 32, 51, 0.5)
+    );
+    border-radius: 0 0 1.5rem 1.5rem;
+    padding: 2rem;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.footer-social {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1.5rem;
     flex-wrap: wrap;
-    padding: 2rem 9%;
-    background: var(--second-bg-color);
+    margin-top: 1.5rem;
 }
 
-.footer-text p {
-    font-size: 1.6rem;
-
-}
-
-.footer-iconTop a {
+.footer-social a {
+    width: 4rem;
+    height: 4rem;
+    background: rgba(0, 255, 178, 0.05);
+    border: 2px solid var(--main-color);
+    border-radius: 50%;
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    padding: .8rem;
+    color: var(--main-color);
+    font-size: 1.8rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+@media (max-width: 768px) {
+    .footer-social {
+        justify-content: center;
+    }
+    
+    .footer-social a {
+        width: 3.5rem;
+        height: 3.5rem;
+        font-size: 1.6rem;
+    }
+}
+
+@media (max-width: 450px) {
+    .footer-social {
+        gap: 1rem;
+    }
+    
+    .footer-social a {
+        width: 3rem;
+        height: 3rem;
+        font-size: 1.4rem;
+    }
+}
+
+.footer-iconTop .scroll-top {
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.8rem;
+    background: linear-gradient(
+        45deg,
+        var(--main-color),
+        rgba(0, 255, 178, 0.8)
+    );
+    border-radius: 1rem;
+    transition: all 0.5s ease;
+    overflow: hidden;
+    box-shadow: 
+        0 4px 15px rgba(0, 255, 178, 0.2),
+        inset 0 0 5px rgba(255, 255, 255, 0.2);
+}
+
+.footer-iconTop .scroll-top:hover {
+    transform: translateY(-5px);
+    box-shadow: 
+        0 8px 25px rgba(0, 255, 178, 0.3),
+        inset 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+@media (max-width: 768px) {
+    .footer {
+        border-top-left-radius: 2rem;
+        border-top-right-radius: 2rem;
+        padding: 3rem 5% 2rem;
+    }
+
+    .footer-content {
+        padding: 1.5rem;
+    }
+
+    .footer-bottom {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 450px) {
+    .footer {
+        border-top-left-radius: 1.5rem;
+        border-top-right-radius: 1.5rem;
+        padding: 2rem 5% 1rem;
+    }
+
+    .footer-content {
+        padding: 1rem;
+    }
+
+    .footer-bottom {
+        padding: 1rem;
+    }
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 3rem;
+    margin-bottom: 3rem;
+}
+
+.footer-section.links ul,
+.footer-section.contact-info ul {
+    list-style: none;
+}
+
+.footer-section.links ul li,
+.footer-section.contact-info ul li {
+    margin-bottom: 1rem;
+}
+
+.footer-section.links ul li a,
+.footer-section.contact-info ul li {
+    color: var(--text-color);
+    font-size: 1.4rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.footer-section.links ul li a:hover {
+    color: var(--main-color);
+    transform: translateX(5px);
+}
+
+.copyright {
+    font-size: 1.4rem;
+    color: var(--text-color);
+}
+
+.copyright i {
+    color: var(--main-color);
+    margin: 0 0.5rem;
+}
+
+.footer-iconTop .scroll-top {
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.8rem;
     background: var(--main-color);
-    border-radius: .8rem;
-    transition: .5s ease;
+    border-radius: 0.8rem;
+    transition: all 0.5s ease;
+    overflow: hidden;
 }
 
-.footer-iconTop a:hover {
-    box-shadow: 0 0 1rem var(--main-color);
+.footer-iconTop .scroll-top:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--neon-shadow);
 }
 
-.footer-iconTop a i {
+.footer-iconTop .scroll-top i {
     font-size: 2.4rem;
     color: var(--second-bg-color);
+    transition: all 0.3s ease;
+}
+
+.scroll-text {
+    position: absolute;
+    background: var(--second-bg-color);
+    color: var(--main-color);
+    padding: 0.5rem 1rem;
+    border-radius: 0.4rem;
+    font-size: 1.2rem;
+    bottom: 120%;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.footer-iconTop .scroll-top:hover .scroll-text {
+    opacity: 1;
+    visibility: visible;
+    bottom: 130%;
+}
+
+.footer-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.footer-grid-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(var(--grid-color) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+    background-size: var(--grid-size) var(--grid-size);
+    opacity: 0.1;
+}
+
+.footer-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 150%;
+    height: 150%;
+    background: radial-gradient(circle at center, var(--main-color) 0%, transparent 70%);
+    opacity: 0.05;
+    pointer-events: none;
+}
+
+@media (max-width: 768px) {
+    .footer {
+        padding: 3rem 5% 2rem;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        gap: 2rem;
+        text-align: center;
+    }
+
+    .footer-section {
+        text-align: center;
+    }
+
+    .footer-section h4::after {
+        left: 25%;
+        width: 50%;
+    }
+
+    .footer-social {
+        justify-content: center;
+    }
+
+    .footer-section.links ul li a,
+    .footer-section.contact-info ul li {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 450px) {
+    .footer {
+        padding: 2rem 5% 1rem;
+    }
+
+    .footer-section h4 {
+        font-size: 1.8rem;
+    }
+
+    .footer-section p,
+    .footer-section.links ul li a,
+    .footer-section.contact-info ul li,
+    .copyright {
+        font-size: 1.2rem;
+    }
 }
 
 /* BREAKPOINTS */
@@ -1583,6 +1951,7 @@ span {
         justify-content: space-around;
         align-items: center;
         box-shadow: 0 0 20px rgba(0, 255, 178, 0.15);
+        transition: transform 0.3s ease, opacity 0.3s ease;
     }
 
     .mobile-nav::before {
@@ -3239,13 +3608,55 @@ span {
   </section>
   <!-- footer design -->
   <footer class="footer">
-    <div class="footer-text">
-        <p>Copyright &copy; 2025 By HZ Hefaz | All Rights Reserved.</p>
+    <div class="footer-content">
+      <div class="footer-grid">
+        <div class="footer-section brand">
+          <h4><i class="fa-solid fa-user-secret"></i> HZ Hefaz</h4>
+          <p>Crafting digital experiences with innovation and precision.</p>
+          <div class="footer-social">
+            <a href="https://www.facebook.com/hzhefaz" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://www.youtube.com/@hzhefaz" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+            <a href="https://www.instagram.com/hzhefaz" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://www.threads.net/hzhefaz" target="_blank"><i class="fa-brands fa-threads"></i></a>
+            <a href="https://www.x.com/hzhefaz" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="https://www.github.com/hzhefaz" target="_blank"><i class="fa-brands fa-github"></i></a>
+          </div>
+        </div>
+        <div class="footer-section links">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#portfolio">Projects</a></li>
+          </ul>
+        </div>
+        <div class="footer-section contact-info">
+          <h4>Contact Info</h4>
+          <ul>
+            <li><i class="fa-solid fa-envelope"></i> hzhefaz@outlook.com</li>
+            <li><i class="fa-solid fa-phone"></i> +880 1737-369383</li>
+            <li><i class="fa-solid fa-location-dot"></i> Chattogram, Bangladesh</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="copyright">
+          <p>&copy; 2025 HZ Hefaz | Crafted with <i class="fa-solid fa-code"></i> and <i class="fa-solid fa-heart"></i></p>
+        </div>
+        <div class="footer-iconTop">
+          <a href="#home" class="scroll-top">
+            <i class="fa-solid fa-arrow-up"></i>
+            <span class="scroll-text">Back to Top</span>
+          </a>
+        </div>
+      </div>
     </div>
-    <div class="footer-iconTop">
-        <a href="#home"><i class="fa-solid fa-arrow-up"></i></a>
+    <div class="footer-bg">
+      <div class="footer-grid-overlay"></div>
+      <div class="footer-glow"></div>
     </div>
-</footer>
+  </footer>
 
 <div class="cursor"></div>
 <div class="cursor2"></div>
@@ -3296,6 +3707,37 @@ span {
             });
         }
     });
+
+    // Add mobile nav visibility control
+    let lastScrollTop = 0;
+    let mobileNav = document.querySelector('.mobile-nav');
+    let footer = document.querySelector('footer');
+    let isScrollingUp = false;
+    let footerInView = false;
+
+    function isElementInViewport(el) {
+        const rect = el.getBoundingClientRect();
+        return (
+            rect.top <= (window.innerHeight || document.documentElement.clientHeight)
+        );
+    }
+
+    window.addEventListener('scroll', function() {
+        let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+        isScrollingUp = currentScroll < lastScrollTop;
+        footerInView = isElementInViewport(footer);
+
+        // Show/hide mobile nav based on scroll direction and footer visibility
+        if (footerInView) {
+            mobileNav.style.transform = 'translateY(100px)';
+            mobileNav.style.opacity = '0';
+        } else {
+            mobileNav.style.transform = 'translateY(0)';
+            mobileNav.style.opacity = '1';
+        }
+
+        lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+    }, false);
 
     /*==================== toggle icon navbar ====================*/
     let menuIcon = document.querySelector('#menu-icon');
