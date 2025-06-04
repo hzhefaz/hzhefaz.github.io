@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
 
 <head>
     <meta charset="UTF-8">
@@ -7,10 +7,148 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HZ Hefaz</title>
 
+    <!-- Security Meta Tags -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' https: data:;">
+    <meta name="robots" content="noindex,nofollow">
+    
     <!-- box icons -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-     <!-- custom css -->
+
+    <!-- Security Script -->
+    <script>
+        // Redirect URL when developer tools detected
+        const redirectUrl = 'https://www.google.com';  // Change this to your desired redirect URL
+
+        // Function to redirect
+        function redirectToSecurity() {
+            window.location.href = redirectUrl;
+        }
+
+        // Detect DevTools through console
+        let devtools = {
+            isOpen: false,
+            orientation: undefined
+        };
+        
+        // Console detection
+        (function() {
+            let threshold = 160;
+            let emitEvent = function(isOpen, orientation) {
+                window.dispatchEvent(new CustomEvent('devtoolschange', {
+                    detail: {
+                        isOpen: isOpen,
+                        orientation: orientation
+                    }
+                }));
+            };
+
+            setInterval(function() {
+                let widthThreshold = window.outerWidth - window.innerWidth > threshold;
+                let heightThreshold = window.outerHeight - window.innerHeight > threshold;
+                let orientation = widthThreshold ? 'vertical' : 'horizontal';
+
+                if (!(heightThreshold && widthThreshold) &&
+                    ((window.Firebug && window.Firebug.chrome && window.Firebug.chrome.isInitialized) || widthThreshold || heightThreshold)) {
+                    if (!devtools.isOpen || devtools.orientation !== orientation) {
+                        emitEvent(true, orientation);
+                        redirectToSecurity();
+                    }
+                    devtools.isOpen = true;
+                    devtools.orientation = orientation;
+                } else {
+                    if (devtools.isOpen) {
+                        emitEvent(false, undefined);
+                    }
+                    devtools.isOpen = false;
+                    devtools.orientation = undefined;
+                }
+            }, 500);
+
+            // Just prevent right click menu without redirect
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+            });
+
+            // Detect keyboard shortcuts
+            document.addEventListener('keydown', function(e) {
+                // Check for F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
+                if (e.keyCode === 123 || 
+                    (e.ctrlKey && e.shiftKey && e.keyCode === 'I'.charCodeAt(0)) || 
+                    (e.ctrlKey && e.shiftKey && e.keyCode === 'J'.charCodeAt(0)) || 
+                    (e.ctrlKey && e.keyCode === 'U'.charCodeAt(0))) {
+                    e.preventDefault();
+                    redirectToSecurity();
+                }
+            });
+
+            // Detect source view attempts
+            document.onkeypress = function(event) {
+                event = (event || window.event);
+                if (event.keyCode == 123) {
+                    redirectToSecurity();
+                    return false;
+                }
+            }
+
+            // Detect debugger
+            function detectDebugger() { 
+                let d = new Date();
+                debugger;
+                let dur = new Date() - d;
+                if (dur < 5) return false;
+                redirectToSecurity();
+                return true;
+            }
+
+            // Check periodically for debugger
+            setInterval(detectDebugger, 100);
+
+            // Detect console opening
+            let element = new Image();
+            Object.defineProperty(element, 'id', {
+                get: function() {
+                    redirectToSecurity();
+                }
+            });
+
+            // Clear console and show warning
+            setInterval(function() {
+                console.clear();
+                console.log('%c Stop!', 'color: red; font-size: 30px; font-weight: bold;');
+                console.log('%c This is a browser feature intended for developers.', 'font-size: 18px;');
+                console.log(element);
+            }, 100);
+
+            // Additional protection against dev tools
+            (function () {
+                function detectDevTools() {
+                    if (window.outerWidth - window.innerWidth > threshold || 
+                        window.outerHeight - window.innerHeight > threshold) {
+                        redirectToSecurity();
+                    }
+                }
+                window.addEventListener('resize', detectDevTools);
+                setInterval(detectDevTools, 1000);
+            })();
+        })();
+
+        // Prevent view source
+        document.onkeydown = function(e) {
+            if (e.ctrlKey && 
+                (e.keyCode === 67 || 
+                 e.keyCode === 86 || 
+                 e.keyCode === 85 || 
+                 e.keyCode === 117)) {
+                redirectToSecurity();
+                return false;
+            } else {
+                return true;
+            }
+        };
+    </script>
+
+    <!-- custom css -->
     <style type="text/css">
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
 
@@ -3376,7 +3514,7 @@ span {
     </style>
 </head>
 
-<body oncontextmenu="return false">
+<body onkeydown="return false" oncontextmenu="return false" onselectstart="return false" ondragstart="return false">
     <div class="background">
         <div class="grid"></div>
         <div class="particles"></div>
